@@ -5,7 +5,7 @@ package me.ivanlis.kloud.serialisation
  * Created by ivanlis on 28/09/2016.
  * Student Course: Software Development
  */
-class Writer {
+class SerialisationWriter {
 
     val HEADER: ByteArray = "KS".toByteArray()
     val VERSION: Short = 0x0100
