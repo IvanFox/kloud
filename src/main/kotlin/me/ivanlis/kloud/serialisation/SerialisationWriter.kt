@@ -1,6 +1,5 @@
 package me.ivanlis.kloud.serialisation
 
-@Suppress("NAME_SHADOWING")
 /**
  * Created by ivanlis on 28/09/2016.
  * Student Course: Software Development
@@ -10,17 +9,29 @@ class SerialisationWriter {
     val HEADER: ByteArray = "KS".toByteArray()
     val VERSION: Short = 0x0100
 
+    // Byte capacity: 1 Byte
     fun writeBytes(dest: ByteArray, pointer: Int, value: Byte): Int {
         dest[pointer] = value
         return pointer.inc()
     }
 
+    // Short capacity: 2 Bytes
     fun writeBytes(dest: ByteArray, pointer: Int, value: Short): Int {
-        dest[pointer] = value.toInt().shr(8).and(0xFF).toByte()
-        dest[pointer.inc()] = value.toInt().and(0xFF).toByte()
-        return pointer + 2
+        var pointer = pointer
+        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
+        dest[pointer++] = value.toInt().and(0xFF).toByte()
+        return pointer
     }
 
+    // Char capacity: unsigned short / 2 bytes
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Char): Int {
+        var pointer = pointer
+        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
+        dest[pointer++] = value.toInt().and(0xFF).toByte()
+        return pointer
+    }
+
+    // Int capacity: 4 Bytes
     fun writeBytes(dest: ByteArray, pointer: Int, value: Int): Int {
         var pointer = pointer
         dest[pointer++] = value.toInt().shr(24).and(0xFF).toByte()
@@ -30,6 +41,7 @@ class SerialisationWriter {
         return pointer
     }
 
+    // Long capacity: 8 Bytes
     fun writeBytes(dest: ByteArray, pointer: Int, value: Long): Int {
         var pointer = pointer
         dest[pointer++] = value.toInt().shr(56).and(0xFF).toByte()
@@ -40,8 +52,16 @@ class SerialisationWriter {
         dest[pointer++] = value.toInt().shr(16).and(0xFF).toByte()
         dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
         dest[pointer++] = value.toInt().and(0xFF).toByte()
-         return pointer
+        return pointer
     }
+
+    // Float capacity: 4 bytes
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Float) : Int {
+        val floatToIntBits = java.lang.Float.floatToIntBits(value)
+        return writeBytes(dest, pointer, floatToIntBits)
+    }
+
+
 
 
 }
