@@ -10,8 +10,9 @@ fun main(args: Array<String>) {
 //    writeBytesWithShortValue()
 //    writeBytesWithIntegerValue()
 //    writeBytesWithLongValue()
-    writeBytesWithFloatValue()
+//    writeBytesWithFloatValue()
 //    writeBytesWithDoubleValue()
+    writeBytesWithBooleanValue()
 }
 
 fun writeBytesWithByteValue() {
@@ -115,6 +116,26 @@ fun writeBytesWithDoubleValue(){
 
     var pointer = writer.writeBytes(data, 0, number)
     pointer = writer.writeBytes(data, pointer, number)
+
+    println("Pointer points to: $pointer")
+    println(data.forEach {
+        print("0x${Integer.toHexString(it.toInt())} ")
+    })
+}
+
+fun writeBytesWithBooleanValue(){
+    val writer = SerialisationWriter()
+
+    val data = ByteArray(16)
+
+    val value1 = false
+    val value2 = true
+
+
+    var pointer = writer.writeBytes(data, 0, value2)
+    pointer = writer.writeBytes(data, pointer, value2)
+    pointer = writer.writeBytes(data, pointer, value1)
+    pointer = writer.writeBytes(data, pointer, value2)
 
     println("Pointer points to: $pointer")
     println(data.forEach {
