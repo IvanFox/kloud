@@ -56,18 +56,21 @@ class SerialisationWriter {
     }
 
     // Float capacity: 4 bytes
-    fun writeBytes(dest: ByteArray, pointer: Int, value: Float) : Int {
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Float): Int {
         val floatToIntBits = java.lang.Float.floatToIntBits(value)
         return writeBytes(dest, pointer, floatToIntBits)
     }
 
     // Double capacity: 8 bytes
-    fun writeBytes(dest: ByteArray, pointer: Int, value: Double) : Int {
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Double): Int {
         val doubleToLongBits = java.lang.Double.doubleToLongBits(value)
         return writeBytes(dest, pointer, doubleToLongBits)
     }
 
-
-
+    // Boolean capacity: 1 bytes
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Boolean): Int {
+        dest[pointer] = if (value.equals(true)) 1.toByte() else 0.toByte()
+        return pointer.inc()
+    }
 
 }
