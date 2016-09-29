@@ -61,6 +61,12 @@ class SerialisationWriter {
         return writeBytes(dest, pointer, floatToIntBits)
     }
 
+    // Double capacity: 8 bytes
+    fun writeBytes(dest: ByteArray, pointer: Int, value: Double) : Int {
+        val doubleToLongBits = java.lang.Double.doubleToLongBits(value)
+        return writeBytes(dest, pointer, doubleToLongBits)
+    }
+
 
 
 
