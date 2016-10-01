@@ -9,6 +9,7 @@ import org.junit.Test
 
 class WriteToByteArrayTest {
 
+    fun printByteArray(data: ByteArray) = data.forEach { print("0x${it.toInt().toHex.capitalize()} ")}
 
     @Test fun writeBytesWithByteValue() {
         val writer = SerialisationWriter()
@@ -24,11 +25,9 @@ class WriteToByteArrayTest {
         pointer = writer.writeBytes(data, pointer, number)
 
 
-        println("Pointer points to: $pointer")
+        println("\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 5)
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt()).capitalize()}")
-        })
+        printByteArray(data)
     }
 
     @Test fun writeBytesWithShortValue() {
@@ -44,12 +43,10 @@ class WriteToByteArrayTest {
         pointer = writer.writeBytes(data, pointer, number)
         pointer = writer.writeBytes(data, pointer, number)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 10)
 
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 
     @Test fun writeBytesWithIntegerValue() {
@@ -64,11 +61,9 @@ class WriteToByteArrayTest {
         pointer = writer.writeBytes(data, pointer, number)
         pointer = writer.writeBytes(data, pointer, number)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 16)
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 
     @Test fun writeBytesWithLongValue() {
@@ -81,11 +76,9 @@ class WriteToByteArrayTest {
         var pointer = writer.writeBytes(data, 0, number)
         pointer = writer.writeBytes(data, pointer, number)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 16)
-        println(data.forEach {
-            print("0x${java.lang.Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 
 
@@ -101,11 +94,9 @@ class WriteToByteArrayTest {
         pointer = writer.writeBytes(data, pointer, number)
         pointer = writer.writeBytes(data, pointer, number)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 16)
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 
 
@@ -119,11 +110,9 @@ class WriteToByteArrayTest {
         var pointer = writer.writeBytes(data, 0, number)
         pointer = writer.writeBytes(data, pointer, number)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 16)
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 
     @Test fun writeBytesWithBooleanValue() {
@@ -140,10 +129,8 @@ class WriteToByteArrayTest {
         pointer = writer.writeBytes(data, pointer, value1)
         pointer = writer.writeBytes(data, pointer, value2)
 
-        println("Pointer points to: $pointer")
+        println("\n\n\nPointer points to: $pointer")
         Assert.assertEquals(pointer, 4)
-        println(data.forEach {
-            print("0x${Integer.toHexString(it.toInt())} ")
-        })
+        printByteArray(data)
     }
 }
