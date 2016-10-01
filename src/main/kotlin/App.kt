@@ -6,7 +6,7 @@
 
 val Int.toHex: String get() = Integer.toHexString(this)
 val Int.toBin: String get() = Integer.toBinaryString(this)
-val Byte.hex: String get() = Integer.toHexString(this.toInt())
+val Byte.toHex: String get() = Integer.toHexString(this.toInt())
 
 
 fun printHex(num: Int) = print("${num.toHex} \n")

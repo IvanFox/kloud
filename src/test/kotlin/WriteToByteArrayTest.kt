@@ -9,7 +9,7 @@ import org.junit.Test
 
 class WriteToByteArrayTest {
 
-    fun printByteArray(data: ByteArray) = data.forEach { print("0x${it.toInt().toHex.capitalize()} ")}
+    fun printByteArray(data: ByteArray) = data.forEach { print("0x${it.toHex.capitalize()} ")}
 
     @Test fun writeBytesWithByteValue() {
         val writer = SerialisationWriter()
