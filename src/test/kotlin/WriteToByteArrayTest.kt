@@ -132,4 +132,29 @@ class WriteToByteArrayTest {
         Assert.assertEquals(pointer, 4)
         printByteArray(data)
     }
+
+    @Test fun writeBytesWithByteArray() {
+        val writer = SerialisationWriter()
+        val data = ByteArray(16)
+        val source = ByteArray(8)
+
+        var pointer = writer.writeBytes(data, 0, source)
+        println("\n\n\nPointer points to: $pointer")
+        Assert.assertEquals(pointer, 8)
+        printByteArray(data)
+
+    }
+
+
+    @Test fun writeBytesWithString() {
+        val writer = SerialisationWriter()
+        val data = ByteArray(16)
+        val source = "Ivan"
+
+        var pointer = writer.writeBytes(data, 0, source)
+        println("\n\n\nPointer points to: $pointer")
+        Assert.assertEquals(pointer, 6)
+        printByteArray(data)
+
+    }
 }
