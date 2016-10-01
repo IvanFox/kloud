@@ -25,6 +25,13 @@ class SerialisationReaderTest {
         Assert.assertEquals(reader.readShort(data, 0), value)
     }
 
+    @Test fun testReadChar() {
+        val data = ByteArray(8)
+        val value = 'I'
+        writer.writeBytes(data, 0 , value)
+        Assert.assertEquals(reader.readChar(data, 0), value)
+    }
+
     @Test fun testReadInt() {
         val data = ByteArray(4)
         val value = 6

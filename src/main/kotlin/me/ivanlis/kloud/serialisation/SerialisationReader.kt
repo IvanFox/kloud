@@ -10,6 +10,10 @@ class SerialisationReader {
         return src[pointer].toByte()
     }
 
+    fun readChar(src: ByteArray, pointer: Int) : Char {
+        return src[pointer].toInt().shl(8).or(src[pointer + 1].toInt()).toChar()
+    }
+
     fun readShort(src: ByteArray, pointer: Int): Short {
         return src[pointer].toInt().shl(8).or(src[pointer + 1].toInt()).toShort()
     }
