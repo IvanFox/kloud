@@ -73,4 +73,16 @@ class SerialisationWriter {
         return pointer.inc()
     }
 
+    fun writeBytes(dest: ByteArray, pointer: Int, value: String) : Int {
+        var pointer = writeBytes(dest, pointer, value.length.toShort())
+        return writeBytes(dest, pointer, value.toByteArray())
+    }
+
+    fun writeBytes(dest: ByteArray, pointer: Int, source : ByteArray) : Int {
+        var pointer = pointer
+        source.forEach {  dest[pointer++] = it }
+        return pointer
+    }
+
+
 }
