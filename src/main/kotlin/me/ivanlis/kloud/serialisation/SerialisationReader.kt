@@ -6,13 +6,9 @@ package me.ivanlis.kloud.serialisation
  */
 class SerialisationReader {
 
-    fun readByte(src: ByteArray, pointer: Int): Byte {
-        return src[pointer].toByte()
-    }
+    fun readByte(src: ByteArray, pointer: Int): Byte = src[pointer].toByte()
 
-    fun readBoolean(src: ByteArray, pointer: Int) : Boolean {
-        return src[pointer] != 0.toByte()
-    }
+    fun readBoolean(src: ByteArray, pointer: Int) : Boolean = src[pointer] != 0.toByte()
 
     fun readChar(src: ByteArray, pointer: Int) : Char {
         return src[pointer].toInt().shl(8).or(src[pointer + 1].toInt()).toChar()
