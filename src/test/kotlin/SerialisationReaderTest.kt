@@ -15,21 +15,23 @@ class SerialisationReaderTest {
         val data = ByteArray(1)
         val value = 6.toByte()
         writer.writeBytes(data, 0 , value)
-        Assert.assertEquals(reader.readByte(data, 0), value)
+        val result = reader.readByte(data, 0)
+        Assert.assertEquals(value, result)
     }
 
     @Test fun testReadShort() {
         val data = ByteArray(2)
         val value = 6.toShort()
         writer.writeBytes(data, 0 , value)
-        Assert.assertEquals(reader.readShort(data, 0), value)
+        val result = reader.readShort(data, 0)
+        Assert.assertEquals(value, result )
     }
 
     @Test fun testReadChar() {
         val data = ByteArray(8)
         val value = 'I'
         writer.writeBytes(data, 0 , value)
-        Assert.assertEquals(reader.readChar(data, 0), value)
+        Assert.assertEquals(value, reader.readChar(data, 0))
     }
 
     @Test fun testReadInt() {
@@ -52,18 +54,29 @@ class SerialisationReaderTest {
     @Test fun testReadFloat() {
         val data = ByteArray(4)
 //        data[0] = 0x0; data[1] = 0x0; data[2] = 0x1; data[3] = 0xf
-        val value = 6.4F
+        val value = 6.41F
         writer.writeBytes(data, 0 , value)
         val result = reader.readFloat(data, 0)
+        println(result)
         Assert.assertEquals(value, result)
     }
 
     @Test fun testReadDouble() {
         val data = ByteArray(8)
-        val value = 6.4
+        val value = 6.41
         writer.writeBytes(data, 0 , value)
         println(reader.readDouble(data, 0 ))
         Assert.assertEquals(value, reader.readDouble(data, 0 ), 0.1)
+    }
+
+    @Test fun testReadBoolean() {
+        val data = ByteArray(2)
+        val value = false
+        val value2 = true
+        writer.writeBytes(data, 0 , value)
+        writer.writeBytes(data, 1 , value2)
+        Assert.assertEquals(value, reader.readBoolean(data, 0 ))
+        Assert.assertEquals(value2, reader.readBoolean(data, 1 ))
     }
 
 
