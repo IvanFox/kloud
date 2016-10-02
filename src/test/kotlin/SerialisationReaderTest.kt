@@ -34,19 +34,36 @@ class SerialisationReaderTest {
 
     @Test fun testReadInt() {
         val data = ByteArray(4)
-        val value = 6
+//        data[0] = 0xf.toByte(); data[1] = 0xf; data[2] = 0xf; data[3] = 0xf
+        val value = 25264
         writer.writeBytes(data, 0 , value)
-        Assert.assertEquals(reader.readInt(data, 0), value)
+        val result = reader.readInt(data, 0)
+        Assert.assertEquals(value, result)
     }
 
     @Test fun testReadLong() {
         val data = ByteArray(8)
-        val value = 6.toLong()
+        val value = 65000L
         writer.writeBytes(data, 0 , value)
         Assert.assertEquals(reader.readLong(data, 0), value)
     }
 
+    @Test fun testReadFloat() {
+        val data = ByteArray(4)
+//        data[0] = 0x0; data[1] = 0x0; data[2] = 0x1; data[3] = 0xf
+        val value = 6.4F
+        writer.writeBytes(data, 0 , value)
+        val result = reader.readFloat(data, 0)
+        Assert.assertEquals(value, result)
+    }
 
+    @Test fun testReadDouble() {
+        val data = ByteArray(8)
+        val value = 6.4
+        writer.writeBytes(data, 0 , value)
+        println(reader.readDouble(data, 0 ))
+        Assert.assertEquals(value, reader.readDouble(data, 0 ), 0.1)
+    }
 
 
 }
