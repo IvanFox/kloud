@@ -43,9 +43,10 @@ class SerialisationReaderTest {
 
     @Test fun testReadLong() {
         val data = ByteArray(8)
-        val value = 65000L
+        val value = 65003212123.toLong()
         writer.writeBytes(data, 0 , value)
-        Assert.assertEquals(reader.readLong(data, 0), value)
+        val result = reader.readLong(data, 0)
+        Assert.assertEquals(value, result)
     }
 
     @Test fun testReadFloat() {
