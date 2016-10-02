@@ -20,20 +20,20 @@ class SerialisationReader {
 
     fun readInt(src: ByteArray, pointer: Int): Int {
         return (src[pointer].toInt().and(0xff)).shl(24).
-                or((src[pointer + 1].toInt().and(0xff)).shl(16).
+                or((src[pointer + 1].toInt().and(0xff)).shl(16)).
                 or((src[pointer + 2].toInt().and(0xff)).shl(8)).
-                or((src[pointer + 3].toInt().and(0xff))))
+                or((src[pointer + 3].toInt().and(0xff)))
     }
 
     fun readLong(src: ByteArray, pointer: Int) : Long {
-        return src[pointer].toInt().shl(56).
-                or(src[pointer + 1].toInt().shl(48)).
-                or(src[pointer + 2].toInt().shl(40)).
-                or(src[pointer + 3].toInt().shl(32)).
-                or(src[pointer + 4].toInt().shl(24)).
-                or(src[pointer + 5].toInt().shl(16)).
-                or(src[pointer + 6].toInt().shl(8)).
-                or(src[pointer + 7].toInt()).toLong()
+        return (src[pointer].toLong().and(0xff)).shl(56).
+                or((src[pointer + 1].toLong().and(0xff)).shl(48)).
+                or((src[pointer + 2].toLong().and(0xff)).shl(40)).
+                or((src[pointer + 3].toLong().and(0xff)).shl(32)).
+                or((src[pointer + 4].toLong().and(0xff)).shl(24)).
+                or((src[pointer + 5].toLong().and(0xff)).shl(16)).
+                or((src[pointer + 6].toLong().and(0xff)).shl(8)).
+                or((src[pointer + 7].toLong().and(0xff)))
     }
 
     fun readFloat(src: ByteArray, pointer: Int) : Float {
