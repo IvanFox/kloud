@@ -10,6 +10,10 @@ class SerialisationReader {
         return src[pointer].toByte()
     }
 
+    fun readBoolean(src: ByteArray, pointer: Int) : Boolean {
+        return src[pointer] != 0.toByte()
+    }
+
     fun readChar(src: ByteArray, pointer: Int) : Char {
         return src[pointer].toInt().shl(8).or(src[pointer + 1].toInt()).toChar()
     }
@@ -37,19 +41,15 @@ class SerialisationReader {
     }
 
     fun readFloat(src: ByteArray, pointer: Int) : Float {
-        print(java.lang.Float.intBitsToFloat(1087163597))
         val floatInIntBits = readInt(src, pointer)
-        println(floatInIntBits)
-        val float =  java.lang.Float.intBitsToFloat(floatInIntBits)
-        return float
+        return java.lang.Float.intBitsToFloat(floatInIntBits)
     }
 
     fun readDouble(src: ByteArray, pointer: Int) : Double {
-        return java.lang.Double.longBitsToDouble(readLong(src, pointer))
+        val doubleInLongBits = readLong(src, pointer)
+        return java.lang.Double.longBitsToDouble(doubleInLongBits)
     }
 
-    fun readBoolean(src: ByteArray, pointer: Int) : Boolean {
-        return src[pointer] != 0.toByte()
-    }
+
 
 }
