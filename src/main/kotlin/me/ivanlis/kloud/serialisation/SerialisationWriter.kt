@@ -34,24 +34,24 @@ class SerialisationWriter {
     // Int capacity: 4 Bytes
     fun writeBytes(dest: ByteArray, pointer: Int, value: Int): Int {
         var pointer = pointer
-        dest[pointer++] = value.toInt().shr(24).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(16).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().and(0xFF).toByte()
+        dest[pointer++] = value.shr(24).and(0xFF).toByte()
+        dest[pointer++] = value.shr(16).and(0xFF).toByte()
+        dest[pointer++] = value.shr(8).and(0xFF).toByte()
+        dest[pointer++] = value.and(0xFF).toByte()
         return pointer
     }
 
     // Long capacity: 8 Bytes
     fun writeBytes(dest: ByteArray, pointer: Int, value: Long): Int {
         var pointer = pointer
-        dest[pointer++] = value.toInt().shr(56).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(48).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(40).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(32).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(24).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(16).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().and(0xFF).toByte()
+        dest[pointer++] = value.shr(56).and(0xFF).toByte()
+        dest[pointer++] = value.shr(48).and(0xFF).toByte()
+        dest[pointer++] = value.shr(40).and(0xFF).toByte()
+        dest[pointer++] = value.shr(32).and(0xFF).toByte()
+        dest[pointer++] = value.shr(24).and(0xFF).toByte()
+        dest[pointer++] = value.shr(16).and(0xFF).toByte()
+        dest[pointer++] = value.shr(8).and(0xFF).toByte()
+        dest[pointer++] = value.and(0xFF).toByte()
         return pointer
     }
 
