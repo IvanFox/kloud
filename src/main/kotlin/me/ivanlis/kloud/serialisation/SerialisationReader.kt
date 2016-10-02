@@ -19,10 +19,10 @@ class SerialisationReader {
     }
 
     fun readInt(src: ByteArray, pointer: Int): Int {
-        return src[pointer].toInt().shl(24).
-                or(src[pointer + 1].toInt().shl(16)).
-                or(src[pointer + 2].toInt().shl(8)).
-                or(src[pointer + 3].toInt())
+        return (src[pointer].toInt().and(0xff)).shl(24).
+                or((src[pointer + 1].toInt().and(0xff)).shl(16).
+                or((src[pointer + 2].toInt().and(0xff)).shl(8)).
+                or((src[pointer + 3].toInt().and(0xff))))
     }
 
     fun readLong(src: ByteArray, pointer: Int) : Long {
@@ -34,6 +34,22 @@ class SerialisationReader {
                 or(src[pointer + 5].toInt().shl(16)).
                 or(src[pointer + 6].toInt().shl(8)).
                 or(src[pointer + 7].toInt()).toLong()
+    }
+
+    fun readFloat(src: ByteArray, pointer: Int) : Float {
+        print(java.lang.Float.intBitsToFloat(1087163597))
+        val floatInIntBits = readInt(src, pointer)
+        println(floatInIntBits)
+        val float =  java.lang.Float.intBitsToFloat(floatInIntBits)
+        return float
+    }
+
+    fun readDouble(src: ByteArray, pointer: Int) : Double {
+        return java.lang.Double.longBitsToDouble(readLong(src, pointer))
+    }
+
+    fun readBoolean(src: ByteArray, pointer: Int) : Boolean {
+        return src[pointer] != 0.toByte()
     }
 
 }
