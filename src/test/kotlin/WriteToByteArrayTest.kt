@@ -1,4 +1,4 @@
-import me.ivanlis.kloud.serialisation.SerialisationWriter
+import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
 import org.junit.Assert
 import org.junit.Test
 
@@ -12,7 +12,7 @@ class WriteToByteArrayTest {
     fun printByteArray(data: ByteArray) = data.forEach { print("${it.toHex.toUpperCase()} ")}
 
     @Test fun writeBytesWithByteValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -30,7 +30,7 @@ class WriteToByteArrayTest {
     }
 
     @Test fun writeBytesWithShortValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -49,7 +49,7 @@ class WriteToByteArrayTest {
     }
 
     @Test fun writeBytesWithIntegerValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -66,7 +66,7 @@ class WriteToByteArrayTest {
     }
 
     @Test fun writeBytesWithLongValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -82,7 +82,7 @@ class WriteToByteArrayTest {
 
 
     @Test fun writeBytesWithFloatValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -100,7 +100,7 @@ class WriteToByteArrayTest {
 
 
     @Test fun writeBytesWithDoubleValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -115,7 +115,7 @@ class WriteToByteArrayTest {
     }
 
     @Test fun writeBytesWithBooleanValue() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
 
         val data = ByteArray(16)
 
@@ -134,7 +134,7 @@ class WriteToByteArrayTest {
     }
 
     @Test fun writeBytesWithByteArray() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
         val data = ByteArray(16)
         val source = ByteArray(8)
 
@@ -147,7 +147,7 @@ class WriteToByteArrayTest {
 
 
     @Test fun writeBytesWithString() {
-        val writer = SerialisationWriter()
+        val writer = SerialisationWriterImpl()
         val data = ByteArray(16)
         val source = "Ivan"
 

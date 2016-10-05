@@ -1,5 +1,5 @@
-import me.ivanlis.kloud.serialisation.SerialisationReader
-import me.ivanlis.kloud.serialisation.SerialisationWriter
+import me.ivanlis.kloud.serialisation.SerialisationReaderImpl
+import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
 import org.junit.Assert
 import org.junit.Test
 
@@ -8,8 +8,8 @@ import org.junit.Test
  * Student Course: Software Development
  */
 class SerialisationReaderTest {
-    val writer = SerialisationWriter()
-    val reader = SerialisationReader()
+    val writer = SerialisationWriterImpl()
+    val reader = SerialisationReaderImpl()
 
     @Test fun testReadByte() {
         val data = ByteArray(1)
@@ -63,7 +63,7 @@ class SerialisationReaderTest {
 
     @Test fun testReadDouble() {
         val data = ByteArray(8)
-        val value = 6.41
+        val value = 632313.414341
         writer.writeBytes(data, 0 , value)
         println(reader.readDouble(data, 0 ))
         Assert.assertEquals(value, reader.readDouble(data, 0 ), 0.1)
