@@ -6,10 +6,10 @@ package me.ivanlis.kloud.serialisation
  */
 object ContainerType {
 
-    @JvmField val UKNOWN    = 0.toByte()
-    @JvmField val FIELD     = 1.toByte()
-    @JvmField val ARRAY     = 2.toByte()
-    @JvmField val OBJECT    = 3.toByte()
+    const val UNKNOWN = 0.toByte()
+    const val FIELD     = 1.toByte()
+    const val ARRAY     = 2.toByte()
+    const val OBJECT    = 3.toByte()
 
 
 

@@ -23,7 +23,7 @@ class Field() {
 
     fun getBytes(dest: ByteArray, pointer: Int): Int {
         var currentPointer = pointer
-        currentPointer = writer.writeBytes(dest, currentPointer, containerType!!)
+        currentPointer = writer.writeBytes(dest, currentPointer, containerType)
         currentPointer = writer.writeBytes(dest, currentPointer, nameLength!!)
         currentPointer = writer.writeBytes(dest, currentPointer, name!!)
         currentPointer = writer.writeBytes(dest, currentPointer, dataType!!)
