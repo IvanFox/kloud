@@ -5,21 +5,15 @@ package me.ivanlis.kloud.serialisation
  * Student Course: Software Development
  */
 // val nameLength: Short, val name: ByteArray, val dataType: Byte, val data: ByteArray, val field: Byte
-open class Field(name : String) {
+abstract class Field(name : String) {
 
     val containerType = ContainerType.FIELD
-    var name: ByteArray = name.toByteArray()
-    var nameLength : Short = name.length.toShort()
-    var dataType: Byte = 0
+    val name: ByteArray = name.toByteArray()
+    val nameLength : Short = name.length.toShort()
+    var dataType: Byte = 4
     lateinit var data: ByteArray
 
     val writer = SerialisationWriterImpl()
-
-    fun initName(name: String) = {
-        assert(name.length < Short.MAX_VALUE)
-        this.nameLength = name.length.toShort()
-        this.name = name.toByteArray()
-    }
 
     fun getBytes(dest: ByteArray, pointer: Int): Int {
         var currentPointer = pointer

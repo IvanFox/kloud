@@ -1,4 +1,5 @@
 import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.extensions.toHex
 import org.junit.Assert
 import org.junit.Test
 
@@ -9,7 +10,7 @@ import org.junit.Test
 
 class WriteToByteArrayTest {
 
-    fun printByteArray(data: ByteArray) = data.forEach { print("${it.toHex.toUpperCase()} ")}
+    fun printByteArray(data: ByteArray) = data.forEach { print("${it.toHex.toUpperCase()} ") }
 
     @Test fun writeBytesWithByteValue() {
         val writer = SerialisationWriterImpl()
