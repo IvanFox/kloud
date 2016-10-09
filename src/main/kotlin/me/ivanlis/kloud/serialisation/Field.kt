@@ -5,13 +5,13 @@ package me.ivanlis.kloud.serialisation
  * Student Course: Software Development
  */
 // val nameLength: Short, val name: ByteArray, val dataType: Byte, val data: ByteArray, val field: Byte
-class Field() {
+open class Field(name : String) {
 
     val containerType = ContainerType.FIELD
-    lateinit var name: ByteArray
-    lateinit var data: ByteArray
-    var nameLength : Short = 0
+    var name: ByteArray = name.toByteArray()
+    var nameLength : Short = name.length.toShort()
     var dataType: Byte = 0
+    lateinit var data: ByteArray
 
     val writer = SerialisationWriterImpl()
 
