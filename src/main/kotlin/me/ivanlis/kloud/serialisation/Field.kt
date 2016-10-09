@@ -8,10 +8,10 @@ package me.ivanlis.kloud.serialisation
 class Field() {
 
     val containerType = ContainerType.FIELD
-    var nameLength: Short? = null
-    var name: ByteArray? = null
-    var data: ByteArray? = null
-    var dataType: Byte? = null
+    lateinit var name: ByteArray
+    lateinit var data: ByteArray
+    var nameLength : Short = 0
+    var dataType: Byte = 0
 
     val writer = SerialisationWriterImpl()
 
@@ -24,10 +24,10 @@ class Field() {
     fun getBytes(dest: ByteArray, pointer: Int): Int {
         var currentPointer = pointer
         currentPointer = writer.writeBytes(dest, currentPointer, containerType)
-        currentPointer = writer.writeBytes(dest, currentPointer, nameLength!!)
-        currentPointer = writer.writeBytes(dest, currentPointer, name!!)
-        currentPointer = writer.writeBytes(dest, currentPointer, dataType!!)
-        currentPointer = writer.writeBytes(dest, currentPointer, data!!)
+        currentPointer = writer.writeBytes(dest, currentPointer, nameLength)
+        currentPointer = writer.writeBytes(dest, currentPointer, name)
+        currentPointer = writer.writeBytes(dest, currentPointer, dataType)
+        currentPointer = writer.writeBytes(dest, currentPointer, data)
         return currentPointer
     }
 }

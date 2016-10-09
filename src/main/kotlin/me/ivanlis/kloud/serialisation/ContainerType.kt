@@ -6,7 +6,7 @@ package me.ivanlis.kloud.serialisation
  */
 object ContainerType {
 
-    const val UNKNOWN = 0.toByte()
+    const val UNKNOWN   = 0.toByte()
     const val FIELD     = 1.toByte()
     const val ARRAY     = 2.toByte()
     const val OBJECT    = 3.toByte()
