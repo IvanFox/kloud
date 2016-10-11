@@ -12,8 +12,9 @@ import org.junit.Test
  */
 class FieldTest {
 
-    @Test fun TestField() {
-        val field = IntField("ages", 5)
+
+    @Test fun testIntegerField() {
+        val field = Field.Integer("ages", 5)
         val data = ByteArray(20)
         field.getBytes(data, 0)
         data.forEach { it.toInt().printHex() }
@@ -25,10 +26,18 @@ class FieldTest {
         Assert.assertEquals("ASCII code for s is :", 73, data[6].toHex.toInt())
     }
 
-    class IntField(name: String, value: Int) : Field(name) {
-        init {
-            data = ByteArray(Type.getSize(Type.INT))
-            writer.writeBytes(data, 0, value)
-        }
+    @Test fun testBooleanField() {
+        val field = Field.Bool("flag", true)
+        val data = ByteArray(9)
+        field.getBytes(data, 0)
+        data.forEach { it.toInt().printHex() }
+        Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
+        Assert.assertEquals("Name size should be: ", "flag".length, data[2].toHex.toInt())
+        Assert.assertEquals("ASCII code for f is :", "66", data[3].toHex)
+        Assert.assertEquals("ASCII code for l is :", "6c", data[4].toHex)
+        Assert.assertEquals("ASCII code for a is :", "61", data[5].toHex)
+        Assert.assertEquals("ASCII code for g is :", "67", data[6].toHex)
     }
+
+
 }
