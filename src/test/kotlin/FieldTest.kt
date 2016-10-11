@@ -1,3 +1,4 @@
+import me.ivanlis.kloud.serialisation.ContainerType
 import me.ivanlis.kloud.serialisation.Field
 import me.ivanlis.kloud.serialisation.Type
 import me.ivanlis.kloud.serialisation.extensions.*
@@ -14,13 +15,13 @@ class FieldTest {
         val field = IntField("ages", 5)
         val data = ByteArray(20)
         field.getBytes(data, 0)
-        data.forEach { it -> print(it.toHex) }
-        Assert.assertEquals("Container type should be:git ", 1, data[0].toHex.toInt())
-        Assert.assertEquals("Name size should be: ", 4, data[2].toHex.toInt())
-        Assert.assertEquals(61, data[3].toHex.toInt())
-        Assert.assertEquals(67, data[4].toHex.toInt())
-        Assert.assertEquals(65, data[5].toHex.toInt())
-        Assert.assertEquals(73, data[6].toHex.toInt())
+        data.forEach { it.toInt().printHex() }
+        Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
+        Assert.assertEquals("Name size should be: ", "ages".length, data[2].toHex.toInt())
+        Assert.assertEquals("ASCII code for a is :", 61, data[3].toHex.toInt())
+        Assert.assertEquals("ASCII code for g is :",67, data[4].toHex.toInt())
+        Assert.assertEquals("ASCII code for e is :",65, data[5].toHex.toInt())
+        Assert.assertEquals("ASCII code for s is :",73, data[6].toHex.toInt())
     }
 
     class IntField(name: String, value: Int) : Field(name) {
