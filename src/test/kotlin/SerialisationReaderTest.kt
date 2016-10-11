@@ -21,7 +21,7 @@ class SerialisationReaderTest {
     }
 
     @Test fun testReadShort() {
-        val data = ByteArray(4)
+        val data = ByteArray(2)
         val value = 255
         writer.writeBytes(data, 0, value)
         val result = reader.readShort(data, 0)
