@@ -15,7 +15,7 @@ class SerialisationReaderImpl : SerialisationReader{
     }
 
     override fun readShort(src: ByteArray, pointer: Int): Short {
-        return src[pointer].toInt().shl(8).or(src[pointer + 1].toInt()).toShort()
+        return (src[pointer].toInt().and(0xff)).shl(8).or(src[pointer + 1].toInt().and(0xff)).toShort()
     }
 
     override fun readInt(src: ByteArray, pointer: Int): Int {
