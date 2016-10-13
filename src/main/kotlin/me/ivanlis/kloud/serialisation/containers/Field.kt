@@ -1,4 +1,8 @@
-package me.ivanlis.kloud.serialisation
+package me.ivanlis.kloud.serialisation.containers
+
+import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.Type
+import me.ivanlis.kloud.serialisation.containers.ContainerType
 
 /**
  * Created by ivanlis on 07/10/2016.
@@ -55,7 +59,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Integer(name: String, value: kotlin.Int) : Field(name) {
+    class Integer(name: String, value: Int) : Field(name) {
         init {
             data = ByteArray(Type.getSize(Type.INT))
             writer.writeBytes(data, 0, value)
