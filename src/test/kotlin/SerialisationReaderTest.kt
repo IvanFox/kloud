@@ -1,6 +1,5 @@
 import me.ivanlis.kloud.serialisation.SerialisationReaderImpl
 import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
-import me.ivanlis.kloud.serialisation.extensions.printHex
 import org.junit.Assert
 import org.junit.Test
 

@@ -17,7 +17,7 @@ class FieldTest {
     @Test fun testIntegerField() {
         val value = 65005
         val field = Field.Integer(varName, value)
-        val data = ByteArray(13)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", varName.length, data[2].toHex.toInt())
@@ -32,7 +32,7 @@ class FieldTest {
     @Test fun testBooleanField() {
         val value = true
         val field = Field.Bool(varName, value)
-        val data = ByteArray(10)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", varName.length, data[2].toHex.toInt())
@@ -48,7 +48,7 @@ class FieldTest {
     @Test fun testByteField() {
         val value = 127.toByte()
         val field = Field.Byte(varName, value)
-        val data = ByteArray(10)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", varName.length, data[2].toHex.toInt())
@@ -78,7 +78,7 @@ class FieldTest {
     @Test fun testShortField() {
         val value = 255.toShort()
         val field = Field.Short(varName, value)
-        val data = ByteArray(11)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", "myVar".length, data[2].toHex.toInt())
@@ -93,7 +93,7 @@ class FieldTest {
     @Test fun testLongField() {
         val value = 25500000L
         val field = Field.Long(varName, value)
-        val data = ByteArray(17)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", "myVar".length, data[2].toHex.toInt())
@@ -108,7 +108,7 @@ class FieldTest {
     @Test fun testDoubleField() {
         val value = 25500.4
         val field = Field.Double(varName, 25500.4)
-        val data = ByteArray(17)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", varName.length, data[2].toHex.toInt())
@@ -123,7 +123,7 @@ class FieldTest {
     @Test fun testFloatField() {
         val value = 25500.4F
         val field = Field.Float(varName, 25500.4F)
-        val data = ByteArray(13)
+        val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("Container type should be: ", ContainerType.FIELD, data[0])
         Assert.assertEquals("Name size should be: ", varName.length, data[2].toHex.toInt())
