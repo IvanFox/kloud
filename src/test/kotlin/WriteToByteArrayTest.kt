@@ -1,4 +1,4 @@
-import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
 import me.ivanlis.kloud.serialisation.extensions.toHex
 import org.junit.Assert
 import org.junit.Test

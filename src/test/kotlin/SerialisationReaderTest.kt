@@ -1,5 +1,5 @@
-import me.ivanlis.kloud.serialisation.SerialisationReaderImpl
-import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.reader.SerialisationReaderImpl
+import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
 import org.junit.Assert
 import org.junit.Test
 

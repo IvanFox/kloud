@@ -1,6 +1,7 @@
-import me.ivanlis.kloud.serialisation.ContainerType
-import me.ivanlis.kloud.serialisation.Field
-import me.ivanlis.kloud.serialisation.SerialisationReaderImpl
+import me.ivanlis.kloud.serialisation.constants.ContainerType
+import me.ivanlis.kloud.serialisation.containers.Field
+import me.ivanlis.kloud.serialisation.reader.SerialisationReaderImpl
+import me.ivanlis.kloud.serialisation.constants.Type
 import me.ivanlis.kloud.serialisation.extensions.toHex
 import org.junit.Assert
 import org.junit.Test
@@ -16,7 +17,7 @@ class FieldTest {
 
     @Test fun testIntegerField() {
         val value = 65005
-        val field = Field.Integer(varName, value)
+        val field = Field.Int(varName, value)
         val data = ByteArray(field.getSize())
         field.getBytes(data, 0)
         Assert.assertEquals("The data size should be equal to: ", 13, data.size)
@@ -27,6 +28,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.INT, data[8])
         Assert.assertEquals(value, reader.readInt(data, 9))
     }
 
@@ -43,6 +45,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.BOOL, data[8])
         Assert.assertEquals("True is equal to :", 1.toByte(), data[9])
     }
 
@@ -60,6 +63,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.BYTE, data[8])
         Assert.assertEquals(value, data[9])
     }
 
@@ -76,6 +80,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.CHAR, data[8])
         Assert.assertEquals(value, reader.readChar(data, 9))
     }
 
@@ -92,6 +97,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.SHORT, data[8])
         Assert.assertEquals(value, reader.readShort(data, 9))
     }
 
@@ -108,6 +114,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.LONG, data[8])
         Assert.assertEquals(value, reader.readLong(data, 9))
     }
 
@@ -124,6 +131,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.DOUBLE, data[8])
         Assert.assertEquals(value, reader.readDouble(data, 9), 0.1)
     }
 
@@ -140,6 +148,7 @@ class FieldTest {
         Assert.assertEquals("ASCII code for V is :", "56", data[5].toHex)
         Assert.assertEquals("ASCII code for a is :", "61", data[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", data[7].toHex)
+        Assert.assertEquals(Type.FLOAT, data[8])
         Assert.assertEquals(value, reader.readFloat(data, 9), 0.1F)
     }
 
