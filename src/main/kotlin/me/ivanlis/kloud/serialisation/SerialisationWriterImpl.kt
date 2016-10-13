@@ -97,13 +97,13 @@ class SerialisationWriterImpl : SerialisationWriter {
 
     fun writeBytes(dest: ByteArray, pointer: Int, source: Array<Boolean>): Int {
         var currPointer = pointer
-        source.forEach { writeBytes(dest, pointer, it) }
+        source.forEach {currPointer = writeBytes(dest, currPointer, it) }
         return currPointer
     }
 
     fun writeBytes(dest: ByteArray, pointer: Int, source: Array<Char>): Int {
         var currPointer = pointer
-        source.forEach { writeBytes(dest, pointer, it) }
+        source.forEach { currPointer = writeBytes(dest, currPointer, it) }
         return currPointer
     }
 
@@ -111,19 +111,20 @@ class SerialisationWriterImpl : SerialisationWriter {
     fun <T> writeBytes(dest: ByteArray, pointer: Int, source: Array<T>): Int
             where T : Number {
         var currPointer = pointer
-        source.forEach { writeBytes(dest, currPointer++, it) }
+        source.forEach { currPointer = writeBytes(dest, currPointer, it) }
         return currPointer
     }
 
-    private fun writeBytes(dest: ByteArray, pointer: Int, it: Number) {
+    private fun writeBytes(dest: ByteArray, pointer: Int, it: Number): Int {
         when (it) {
-            is Byte -> writeBytes(dest, pointer, it)
-            is Short -> writeBytes(dest, pointer, it)
-            is Int -> writeBytes(dest, pointer, it)
-            is Long -> writeBytes(dest, pointer, it)
-            is Float -> writeBytes(dest, pointer, it)
-            is Double -> writeBytes(dest, pointer, it)
+            is Byte -> return writeBytes(dest, pointer, it)
+            is Short -> return writeBytes(dest, pointer, it)
+            is Int -> return writeBytes(dest, pointer, it)
+            is Long -> return writeBytes(dest, pointer, it)
+            is Float -> return writeBytes(dest, pointer, it)
+            is Double -> return writeBytes(dest, pointer, it)
         }
+        throw Exception("Given number type: '${it.javaClass}' is not supported")
     }
 
 }
