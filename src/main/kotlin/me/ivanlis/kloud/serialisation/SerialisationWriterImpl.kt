@@ -11,81 +11,119 @@ class SerialisationWriterImpl : SerialisationWriter {
 
     // Byte capacity: 1 Byte
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Byte): Int {
+        // TODO assert for errors
         dest[pointer] = value
         return pointer.inc()
     }
 
     // Short capacity: 2 Bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Short): Int {
-        var pointer = pointer
-        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().and(0xFF).toByte()
-        return pointer
+        // TODO assert for errors
+        var currPointer = pointer
+        dest[currPointer++] = value.toInt().shr(8).and(0xFF).toByte()
+        dest[currPointer++] = value.toInt().and(0xFF).toByte()
+        return currPointer
     }
 
     // Char capacity: unsigned short / 2 bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Char): Int {
-        var pointer = pointer
-        dest[pointer++] = value.toInt().shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.toInt().and(0xFF).toByte()
-        return pointer
+        // TODO assert for errors
+        var currPointer = pointer
+        dest[currPointer++] = value.toInt().shr(8).and(0xFF).toByte()
+        dest[currPointer++] = value.toInt().and(0xFF).toByte()
+        return currPointer
     }
 
     // Int capacity: 4 Bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Int): Int {
-        var pointer = pointer
-        dest[pointer++] = value.shr(24).and(0xFF).toByte()
-        dest[pointer++] = value.shr(16).and(0xFF).toByte()
-        dest[pointer++] = value.shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.and(0xFF).toByte()
-        return pointer
+        // TODO assert for errors
+        var currPointer = pointer
+        dest[currPointer++] = value.shr(24).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(16).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(8).and(0xFF).toByte()
+        dest[currPointer++] = value.and(0xFF).toByte()
+        return currPointer
     }
 
     // Long capacity: 8 Bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Long): Int {
-        var pointer = pointer
-        dest[pointer++] = value.shr(56).and(0xFF).toByte()
-        dest[pointer++] = value.shr(48).and(0xFF).toByte()
-        dest[pointer++] = value.shr(40).and(0xFF).toByte()
-        dest[pointer++] = value.shr(32).and(0xFF).toByte()
-        dest[pointer++] = value.shr(24).and(0xFF).toByte()
-        dest[pointer++] = value.shr(16).and(0xFF).toByte()
-        dest[pointer++] = value.shr(8).and(0xFF).toByte()
-        dest[pointer++] = value.and(0xFF).toByte()
-        return pointer
+        var currPointer = pointer
+        // TODO assert for errors
+        dest[currPointer++] = value.shr(56).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(48).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(40).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(32).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(24).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(16).and(0xFF).toByte()
+        dest[currPointer++] = value.shr(8).and(0xFF).toByte()
+        dest[currPointer++] = value.and(0xFF).toByte()
+        return currPointer
     }
 
     // Float capacity: 4 bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Float): Int {
+        // TODO assert for errors
         val floatToIntBits = java.lang.Float.floatToIntBits(value)
         return writeBytes(dest, pointer, floatToIntBits)
     }
 
     // Double capacity: 8 bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Double): Int {
+        // TODO assert for errors
         val doubleToLongBits = java.lang.Double.doubleToLongBits(value)
         return writeBytes(dest, pointer, doubleToLongBits)
     }
 
     // Boolean capacity: 1 bytes
     override fun writeBytes(dest: ByteArray, pointer: Int, value: Boolean): Int {
-        dest[pointer] = if (value.equals(true)) 1.toByte() else 0.toByte()
+        // TODO assert for errors
+        dest[pointer] = if (value == true) 1.toByte() else 0.toByte()
         return pointer.inc()
     }
 
     // first 2 bytes represent the length of the string
-    override fun writeBytes(dest: ByteArray, pointer: Int, value: String) : Int {
-        var pointer = writeBytes(dest, pointer, value.length.toShort())
-        return writeBytes(dest, pointer, value.toByteArray())
+    override fun writeBytes(dest: ByteArray, pointer: Int, value: String): Int {
+        var currPointer = writeBytes(dest, pointer, value.length.toShort())
+        return writeBytes(dest, currPointer, value.toByteArray())
     }
 
 
     // Mem copy
-    fun writeBytes(dest: ByteArray, pointer: Int, source : ByteArray) : Int {
-        var pointer = pointer
-        source.forEach {  dest[pointer++] = it }
-        return pointer
+    fun writeBytes(dest: ByteArray, pointer: Int, source: ByteArray): Int {
+        var currPointer = pointer
+        source.forEach { dest[currPointer++] = it }
+        return currPointer
     }
 
+    fun writeBytes(dest: ByteArray, pointer: Int, source: Array<Boolean>): Int {
+        var currPointer = pointer
+        source.forEach { writeBytes(dest, pointer, it) }
+        return currPointer
+    }
+
+    fun writeBytes(dest: ByteArray, pointer: Int, source: Array<Char>): Int {
+        var currPointer = pointer
+        source.forEach { writeBytes(dest, pointer, it) }
+        return currPointer
+    }
+
+
+    fun <T> writeBytes(dest: ByteArray, pointer: Int, source: Array<T>): Int
+            where T : Number {
+        var currPointer = pointer
+        source.forEach { writeBytes(dest, currPointer++, it) }
+        return currPointer
+    }
+
+    private fun writeBytes(dest: ByteArray, pointer: Int, it: Number) {
+        when (it) {
+            is Byte -> writeBytes(dest, pointer, it)
+            is Short -> writeBytes(dest, pointer, it)
+            is Int -> writeBytes(dest, pointer, it)
+            is Long -> writeBytes(dest, pointer, it)
+            is Float -> writeBytes(dest, pointer, it)
+            is Double -> writeBytes(dest, pointer, it)
+        }
+    }
 
 }
