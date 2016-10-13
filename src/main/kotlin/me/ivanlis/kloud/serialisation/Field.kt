@@ -6,10 +6,10 @@ package me.ivanlis.kloud.serialisation
  */
 abstract class Field(name: String) {
 
-    val containerType = ContainerType.FIELD
+    val containerType = ContainerType.FIELD                 // 1 byte
     val name: ByteArray = name.toByteArray()
-    val nameLength: kotlin.Short = name.length.toShort()
-    var dataType: kotlin.Byte = 4
+    val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
+    var dataType: kotlin.Byte = 4                           // 1 byte
     lateinit var data: ByteArray
 
     val writer = SerialisationWriterImpl()
@@ -23,6 +23,9 @@ abstract class Field(name: String) {
         currentPointer = writer.writeBytes(dest, currentPointer, data)
         return currentPointer
     }
+
+    fun getSize() : Int = 1 + 1 + 2 + name.size + data.size
+
 
     class Bool(name: String, value: Boolean) : Field(name) {
         init {
