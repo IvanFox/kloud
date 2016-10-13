@@ -1,4 +1,4 @@
-package me.ivanlis.kloud.serialisation
+package me.ivanlis.kloud.serialisation.writer
 
 /**
  * Created by ivanlis on 28/09/2016.

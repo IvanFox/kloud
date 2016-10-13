@@ -1,4 +1,4 @@
-package me.ivanlis.kloud.serialisation.containers
+package me.ivanlis.kloud.serialisation.constants
 
 /**
  * Created by ivanlis on 08/10/2016.

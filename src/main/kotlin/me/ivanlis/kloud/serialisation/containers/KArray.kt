@@ -1,7 +1,8 @@
 package me.ivanlis.kloud.serialisation.containers
 
-import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
-import me.ivanlis.kloud.serialisation.Type
+import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.constants.Type
+import me.ivanlis.kloud.serialisation.constants.ContainerType
 
 /**
  * Created by ivanlis on 13/10/2016.
@@ -23,10 +24,12 @@ abstract class KArray(name: String, val arraySize: kotlin.Int) {
         currentPointer = writer.writeBytes(dest, currentPointer, nameLength)
         currentPointer = writer.writeBytes(dest, currentPointer, name)
         currentPointer = writer.writeBytes(dest, currentPointer, dataType)
-        currentPointer = writer.writeBytes(dest, currentPointer, data)
         currentPointer = writer.writeBytes(dest, currentPointer, arraySize)
+        currentPointer = writer.writeBytes(dest, currentPointer, data)
         return currentPointer
     }
+
+    fun getSize(): kotlin.Int = 1 + 4 + 2 + 1 + name.size + data.size
 
     class Bool(name: String, data: kotlin.Array<Boolean>) : KArray(name, data.size) {
         init {

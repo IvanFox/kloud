@@ -1,7 +1,8 @@
 package me.ivanlis.kloud.serialisation.containers
 
-import me.ivanlis.kloud.serialisation.SerialisationWriterImpl
-import me.ivanlis.kloud.serialisation.Type
+import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
+import me.ivanlis.kloud.serialisation.constants.Type
+import me.ivanlis.kloud.serialisation.constants.ContainerType
 
 /**
  * Created by ivanlis on 07/10/2016.
@@ -17,7 +18,7 @@ abstract class Field(name: String) {
 
     val writer = SerialisationWriterImpl()
 
-    fun getBytes(dest: ByteArray, pointer: Int): Int {
+    fun getBytes(dest: ByteArray, pointer: kotlin.Int): kotlin.Int {
         var currentPointer = pointer
         currentPointer = writer.writeBytes(dest, currentPointer, containerType)
         currentPointer = writer.writeBytes(dest, currentPointer, nameLength)
@@ -27,7 +28,7 @@ abstract class Field(name: String) {
         return currentPointer
     }
 
-    fun getSize(): Int = 1 + 1 + 2 + name.size + data.size
+    fun getSize(): kotlin.Int = 1 + 1 + 2 + name.size + data.size
 
 
     class Bool(name: String, value: Boolean) : Field(name) {
@@ -62,7 +63,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Integer(name: String, value: Int) : Field(name) {
+    class Int(name: String, value: kotlin.Int) : Field(name) {
         init {
             dataType = Type.INT
             data = ByteArray(Type.getSize(Type.INT))

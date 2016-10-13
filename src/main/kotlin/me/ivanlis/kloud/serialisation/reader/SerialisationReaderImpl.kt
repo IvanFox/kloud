@@ -1,10 +1,10 @@
-package me.ivanlis.kloud.serialisation
+package me.ivanlis.kloud.serialisation.reader
 
 /**
  * Created by ivanlis on 01/10/2016.
  * Student Course: Software Development
  */
-class SerialisationReaderImpl : SerialisationReader{
+class SerialisationReaderImpl : SerialisationReader {
 
     override fun readByte(src: ByteArray, pointer: Int): Byte = src[pointer].toByte()
 
