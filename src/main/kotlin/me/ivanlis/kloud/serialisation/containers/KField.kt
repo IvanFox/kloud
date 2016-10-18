@@ -8,13 +8,13 @@ import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
  * Created by ivanlis on 07/10/2016.
  * Student Course: Software Development
  */
-abstract class Field(name: String) {
+abstract class KField(name: String) {
 
-    val containerType = ContainerType.FIELD                 // 1 byte
-    val name: ByteArray = name.toByteArray()
-    val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
-    var dataType: kotlin.Byte = 0                          // 1 byte
-    lateinit var data: ByteArray
+    private val containerType = ContainerType.FIELD                 // 1 byte
+    private val name: ByteArray = name.toByteArray()
+    private val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
+    protected var dataType: kotlin.Byte = 0                          // 1 byte
+    protected lateinit var data: ByteArray
 
     val writer = SerialisationWriterImpl()
 
@@ -33,7 +33,7 @@ abstract class Field(name: String) {
             Type.getSize(Type.SHORT) + name.size + data.size
 
 
-    class Bool(name: String, value: Boolean) : Field(name) {
+    class Bool(name: String, value: Boolean) : KField(name) {
         init {
             dataType = Type.BOOL
             data = ByteArray(Type.getSize(Type.BOOL))
@@ -41,7 +41,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Byte(name: String, value: kotlin.Byte) : Field(name) {
+    class Byte(name: String, value: kotlin.Byte) : KField(name) {
         init {
             dataType = Type.BYTE
             data = ByteArray(Type.getSize(Type.BYTE))
@@ -49,7 +49,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Char(name: String, value: kotlin.Char) : Field(name) {
+    class Char(name: String, value: kotlin.Char) : KField(name) {
         init {
             dataType = Type.CHAR
             data = ByteArray(Type.getSize(Type.CHAR))
@@ -57,7 +57,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Short(name: String, value: kotlin.Short) : Field(name) {
+    class Short(name: String, value: kotlin.Short) : KField(name) {
         init {
             dataType = Type.SHORT
             data = ByteArray(Type.getSize(Type.SHORT))
@@ -65,7 +65,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Int(name: String, value: kotlin.Int) : Field(name) {
+    class Int(name: String, value: kotlin.Int) : KField(name) {
         init {
             dataType = Type.INT
             data = ByteArray(Type.getSize(Type.INT))
@@ -73,7 +73,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Long(name: String, value: kotlin.Long) : Field(name) {
+    class Long(name: String, value: kotlin.Long) : KField(name) {
         init {
             dataType = Type.LONG
             data = ByteArray(Type.getSize(Type.LONG))
@@ -81,7 +81,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Float(name: String, value: kotlin.Float) : Field(name) {
+    class Float(name: String, value: kotlin.Float) : KField(name) {
         init {
             dataType = Type.FLOAT
             data = ByteArray(Type.getSize(Type.FLOAT))
@@ -89,7 +89,7 @@ abstract class Field(name: String) {
         }
     }
 
-    class Double(name: String, value: kotlin.Double) : Field(name) {
+    class Double(name: String, value: kotlin.Double) : KField(name) {
         init {
             dataType = Type.DOUBLE
             data = ByteArray(Type.getSize(Type.DOUBLE))
