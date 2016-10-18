@@ -1,8 +1,8 @@
 package me.ivanlis.kloud.serialisation.containers
 
-import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
-import me.ivanlis.kloud.serialisation.constants.Type
 import me.ivanlis.kloud.serialisation.constants.ContainerType
+import me.ivanlis.kloud.serialisation.constants.Type
+import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
 
 /**
  * Created by ivanlis on 07/10/2016.
@@ -28,7 +28,9 @@ abstract class Field(name: String) {
         return currentPointer
     }
 
-    fun getSize(): kotlin.Int = 1 + 1 + 2 + name.size + data.size
+    fun getSize(): kotlin.Int =
+            Type.getSize(Type.BYTE) + Type.getSize(Type.BYTE) +
+            Type.getSize(Type.SHORT) + name.size + data.size
 
 
     class Bool(name: String, value: Boolean) : Field(name) {
