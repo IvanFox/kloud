@@ -1,9 +1,9 @@
 import me.ivanlis.kloud.serialisation.constants.ContainerType
 import me.ivanlis.kloud.serialisation.constants.Type
 import me.ivanlis.kloud.serialisation.containers.KArray
+import me.ivanlis.kloud.serialisation.extensions.saveToFile
 import me.ivanlis.kloud.serialisation.extensions.toHex
 import me.ivanlis.kloud.serialisation.reader.SerialisationReaderImpl
-import me.ivanlis.kloud.serialisation.writer.SerialisationWriterImpl
 import org.junit.Assert
 import org.junit.Test
 
@@ -17,7 +17,7 @@ class ArrayTest {
     val varName = "myArr"
 
     @Test fun testIntArray() {
-        val data: Array<Int> = Array(10, { i -> i + 1 })
+        val data: Array<Int> = Array(10000, { i -> i + 1 })
         val intArr = KArray.Int(varName, data)
         val byteData = ByteArray(intArr.getSize())
         intArr.getBytes(byteData, 0)
@@ -31,26 +31,35 @@ class ArrayTest {
         Assert.assertEquals("ASCII code for r is :", "72", byteData[6].toHex)
         Assert.assertEquals("ASCII code for r is :", "72", byteData[7].toHex)
         Assert.assertEquals(Type.INT, byteData[8])
-        Assert.assertEquals("Array size should be: ", byteData.size, reader.readInt(byteData, 9))
+        Assert.assertEquals("Array size should be: ", data.size, reader.readInt(byteData, 9))
     }
 
     @Test fun testBoolArray() {
         val data: Array<Boolean> = Array(10, { i -> true })
         data.forEach(::print)
         println()
-        val intArr = KArray.Bool(varName, data)
-        val byteData = ByteArray(intArr.getSize())
-        intArr.getBytes(byteData, 0)
+        val boolArr = KArray.Bool(varName, data)
+        val byteData = ByteArray(boolArr.getSize())
+        boolArr.getBytes(byteData, 0)
         byteData.forEach { print(it.toHex) }
     }
 
     @Test fun testFloatArray() {
-        val data: Array<Int> = Array(10, { i -> i + 1 })
+        val data: Array<Float> = Array(10, { i -> i + 1.0F })
         data.forEach(::print)
-        println()
-        val intArr = KArray.Int(varName, data)
-        val byteData = ByteArray(intArr.getSize())
-        intArr.getBytes(byteData, 0)
+        val arr = KArray.Float(varName, data)
+        val byteData = ByteArray(arr.getSize())
+        arr.getBytes(byteData, 0)
         byteData.forEach { print(it.toHex) }
+    }
+
+    @Test fun serialiseToFile() {
+        val numbers : Array<Int> = Array(1000, { i -> i + 1 })
+        val arr = KArray.Int(varName, numbers)
+        val bytesData = ByteArray(arr.getSize())
+        arr.getBytes(bytesData, 0)
+        bytesData.forEach { print(it.toHex) }
+        saveToFile("/Users/ivanlis/Projects/kloud/src/main/resources/mydata", bytesData)
+
     }
 }
