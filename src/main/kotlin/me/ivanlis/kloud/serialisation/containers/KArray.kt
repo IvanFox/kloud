@@ -10,11 +10,11 @@ import me.ivanlis.kloud.serialisation.constants.ContainerType
  */
 abstract class KArray(name: String, val arraySize: kotlin.Int) {
 
-    val containerType = ContainerType.ARRAY                 // 1 byte
-    val name: ByteArray = name.toByteArray()
-    val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
-    var dataType: kotlin.Byte = 4                           // 1 byte
-    lateinit var data: ByteArray
+    private val containerType = ContainerType.ARRAY                 // 1 byte
+    private val name: ByteArray = name.toByteArray()
+    private val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
+    protected var dataType: kotlin.Byte = 4                           // 1 byte
+    protected lateinit var data: ByteArray
 
     val writer = SerialisationWriterImpl()
 
@@ -29,7 +29,8 @@ abstract class KArray(name: String, val arraySize: kotlin.Int) {
         return currentPointer
     }
 
-    fun getSize(): kotlin.Int = 1 + 4 + 2 + 1 + name.size + data.size
+    fun getSize(): kotlin.Int = Type.getSize(Type.BYTE) + Type.getSize(Type.INT) +
+            Type.getSize(Type.SHORT) + Type.getSize(Type.BYTE) + name.size + data.size
 
     class Bool(name: String, data: kotlin.Array<Boolean>) : KArray(name, data.size) {
         init {
