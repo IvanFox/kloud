@@ -18,7 +18,7 @@ abstract class KArray(name: String, val arraySize: kotlin.Int) {
 
     val writer = SerialisationWriterImpl()
 
-    fun getBytes(dest: ByteArray, pointer: kotlin.Int): kotlin.Int {
+    fun writeBytes(dest: ByteArray, pointer: kotlin.Int): kotlin.Int {
         var currentPointer = pointer
         currentPointer = writer.writeBytes(dest, currentPointer, containerType)
         currentPointer = writer.writeBytes(dest, currentPointer, nameLength)

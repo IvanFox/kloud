@@ -16,9 +16,9 @@ abstract class KField(name: String) {
     protected var dataType: kotlin.Byte = 0                          // 1 byte
     protected lateinit var data: ByteArray
 
-    val writer = SerialisationWriterImpl()
+    protected val writer = SerialisationWriterImpl()
 
-    fun getBytes(dest: ByteArray, pointer: kotlin.Int): kotlin.Int {
+    fun writeBytes(dest: ByteArray, pointer: kotlin.Int): kotlin.Int {
         var currentPointer = pointer
         currentPointer = writer.writeBytes(dest, currentPointer, containerType)
         currentPointer = writer.writeBytes(dest, currentPointer, nameLength)
