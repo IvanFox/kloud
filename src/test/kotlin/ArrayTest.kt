@@ -20,7 +20,7 @@ class ArrayTest {
         val data: Array<Int> = Array(10000, { i -> i + 1 })
         val intArr = KArray.Int(varName, data)
         val byteData = ByteArray(intArr.getSize())
-        intArr.getBytes(byteData, 0)
+        intArr.writeBytes(byteData, 0)
         byteData.forEach { print(it.toHex) }
         Assert.assertEquals("The data size should be equal to: ", intArr.getSize(), byteData.size)
         Assert.assertEquals("Container Type: ", ContainerType.ARRAY, byteData[0])
@@ -40,7 +40,7 @@ class ArrayTest {
         println()
         val boolArr = KArray.Bool(varName, data)
         val byteData = ByteArray(boolArr.getSize())
-        boolArr.getBytes(byteData, 0)
+        boolArr.writeBytes(byteData, 0)
         byteData.forEach { print(it.toHex) }
     }
 
@@ -49,7 +49,7 @@ class ArrayTest {
         data.forEach(::print)
         val arr = KArray.Float(varName, data)
         val byteData = ByteArray(arr.getSize())
-        arr.getBytes(byteData, 0)
+        arr.writeBytes(byteData, 0)
         byteData.forEach { print(it.toHex) }
     }
 
@@ -57,7 +57,7 @@ class ArrayTest {
         val numbers : Array<Int> = Array(1000, { i -> i + 1 })
         val arr = KArray.Int(varName, numbers)
         val bytesData = ByteArray(arr.getSize())
-        arr.getBytes(bytesData, 0)
+        arr.writeBytes(bytesData, 0)
         bytesData.forEach { print(it.toHex) }
         saveToFile("/Users/ivanlis/Projects/kloud/src/main/resources/mydata", bytesData)
 
