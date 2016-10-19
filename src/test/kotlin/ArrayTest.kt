@@ -59,7 +59,7 @@ class ArrayTest {
         val bytesData = ByteArray(arr.getSize())
         arr.writeBytes(bytesData, 0)
         bytesData.forEach { print(it.toHex) }
-        saveToFile("/Users/ivanlis/Projects/kloud/src/main/resources/mydata", bytesData)
+        saveToFile("mydata", bytesData)
 
     }
 }
