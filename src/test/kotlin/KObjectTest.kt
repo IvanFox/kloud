@@ -19,13 +19,13 @@ class KObjectTest {
     val objName = "MyObject"
     val fieldName = "MyField"
     val arrName = "MyArray"
-    val arrNumber = Array(100, { i -> i + 1})
-    val reader : SerialisationReader = SerialisationReaderImpl()
+    val arrNumber = Array(100, { i -> i + 1 })
+    val reader: SerialisationReader = SerialisationReaderImpl()
 
     @Test fun testKObjectInit() {
         val field = KField.Int(fieldName, 99999)
         val array = KArray.Int(arrName, arrNumber)
-        val myObj = KObject(objName, Employee::class.java )
+        val myObj = KObject(objName, Employee::class.java)
 
         myObj.addField(field)
         myObj.addArray(array)
@@ -46,5 +46,20 @@ class KObjectTest {
         Assert.assertEquals("Classname length should be equal to: ", Employee::class.qualifiedName,
                                                                                    reader.readShort(stream, 11))
         stream.forEach { print(it.toHex) }
+    }
+
+    @Test fun serialiseEmployeeObject() {
+        val employee = Employee(30, 300000)
+        val fields = employee.javaClass.declaredFields
+        val kfields: MutableList<KArray>
+
+
+        fields.forEach {
+            it.isAccessible = true
+            print("${it.genericType.typeName} ${it.name} ${it.get(employee)} \n")
+
+        }
+
+
     }
 }
