@@ -16,8 +16,8 @@ class KObject<T>(name: String, clazz: Class<T>) {
     private val name: ByteArray = name.toByteArray()
     private val nameLength: kotlin.Short = name.length.toShort()    // 2 byte
 
-    private val classNameLength :Short = clazz.name.length.toShort()
-    private val className = clazz.name.toByteArray()
+    private val classNameLength :Short = clazz.simpleName.length.toShort()
+    private val className = clazz.simpleName.toByteArray()
 
     private var fieldSize: Short = 0
     private val fields: MutableList<KField> = ArrayList()
